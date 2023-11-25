@@ -2,6 +2,7 @@ version: '3'
 
 services:
   nest-app:
+    image: jimeme/simulizer-back:latest
     build:
       context: .
       dockerfile: Dockerfile
