@@ -25,6 +25,8 @@ export class PersistenceModule {
         const dbSynchronize = process.env.DB_SYNCHRONIZE === 'true' || false;
         const dbRetryAttempts = Number(process.env.DB_RETRY_ATTEMPTS) || 0;
         const dbRetryDelay = Number(process.env.DB_RETRY_DELAY) || 0;
+        const dbSslConnection =
+            process.env.DB_SSL_CONNECTION === 'true' || false;
 
         return {
             module: PersistenceModule,
@@ -41,6 +43,7 @@ export class PersistenceModule {
                     synchronize: dbSynchronize,
                     retryAttempts: dbRetryAttempts,
                     retryDelay: dbRetryDelay,
+                    ssl: dbSslConnection,
                 }),
             ],
             exports: [TypeOrmModule],
