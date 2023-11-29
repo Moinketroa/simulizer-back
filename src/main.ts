@@ -8,6 +8,8 @@ async function bootstrap() {
 
     app.useGlobalPipes(new ValidationPipe({ transform: true }));
 
+    app.enableCors();
+
     setupSwagger(app);
 
     await app.listen(3000);
