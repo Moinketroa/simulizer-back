@@ -2,8 +2,9 @@ import { DynamicModule, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AirportEntity } from './airport/entity/airport.entity';
 import * as process from 'process';
+import { AirportConnectionEntity } from './airport-connection/entity/airport-connection.entity';
 
-const moduleEntities: any[] = [AirportEntity];
+const moduleEntities: any[] = [AirportEntity, AirportConnectionEntity];
 
 @Module({})
 export class PersistenceModule {
