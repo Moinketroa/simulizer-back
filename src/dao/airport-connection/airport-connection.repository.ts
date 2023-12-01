@@ -11,4 +11,9 @@ export class AirportConnectionRepository extends Repository<AirportConnectionEnt
     ) {
         super(repository.target, repository.manager, repository.queryRunner);
     }
+
+    async isEmpty(): Promise<boolean> {
+        const count = await this.count();
+        return count === 0;
+    }
 }
