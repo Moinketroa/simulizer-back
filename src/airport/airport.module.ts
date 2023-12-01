@@ -8,5 +8,6 @@ import { AirportMapper } from './mapper/airport.mapper';
     controllers: [AirportController],
     providers: [AirportMapper, AirportService],
     imports: [AirportPersistenceModule],
+    exports: [AirportMapper],
 })
 export class AirportModule {}
