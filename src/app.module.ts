@@ -3,6 +3,7 @@ import { PersistenceModule } from './dao/persistence.module';
 import { AirportModule } from './airport/airport.module';
 import { ConfigModule } from '@nestjs/config';
 import { AirportConnectionModule } from './airport-connection/airport-connection.module';
+import { TravelerModule } from './traveler/traveler.module';
 
 @Module({
     imports: [
@@ -14,6 +15,7 @@ import { AirportConnectionModule } from './airport-connection/airport-connection
 
         AirportModule,
         AirportConnectionModule,
+        TravelerModule,
     ],
 })
 export class AppModule {}

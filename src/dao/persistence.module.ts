@@ -3,8 +3,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AirportEntity } from './airport/entity/airport.entity';
 import * as process from 'process';
 import { AirportConnectionEntity } from './airport-connection/entity/airport-connection.entity';
+import { TravelerEntity } from './traveler/entity/traveler.entity';
 
-const moduleEntities: any[] = [AirportEntity, AirportConnectionEntity];
+const moduleEntities: any[] = [
+    AirportEntity,
+    AirportConnectionEntity,
+    TravelerEntity,
+];
 
 @Module({})
 export class PersistenceModule {
