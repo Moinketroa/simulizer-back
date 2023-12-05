@@ -4,18 +4,23 @@ import { AirportConnectionFactory } from './airport-connection.factory';
 import { AirportRepository } from '../dao/airport/airport.repository';
 import { PageOptionsDto } from '../util/dto/page-options.dto';
 import { PageDto } from '../util/dto/page.dto';
-import { PageMetaDto } from '../util/dto/page-meta.dto';
 import { AirportConnectionDto } from './dto/airport-connection.dto';
 import { AirportConnectionMapper } from './mapper/airport-connection.mapper';
+import { PaginatedService } from '../util/service/paginated.service';
 
 @Injectable()
-export class AirportConnectionService implements OnModuleInit {
+export class AirportConnectionService
+    extends PaginatedService
+    implements OnModuleInit
+{
     constructor(
         private readonly _airportConnectionFactory: AirportConnectionFactory,
         private readonly _airportConnectionMapper: AirportConnectionMapper,
         private readonly _airportConnectionRepository: AirportConnectionRepository,
         private readonly _airportRepository: AirportRepository
-    ) {}
+    ) {
+        super();
+    }
 
     async onModuleInit(): Promise<any> {
         if (await this._airportConnectionRepository.isEmpty()) {
@@ -41,16 +46,11 @@ export class AirportConnectionService implements OnModuleInit {
                 'secondAirport'
             );
 
-        queryBuilder.skip(pageOptionsDto.skip).take(pageOptionsDto.take);
-
-        const itemCount = await queryBuilder.getCount();
-        const { entities } = await queryBuilder.getRawAndEntities();
-
-        const pageMetaDto = new PageMetaDto({ itemCount, pageOptionsDto });
-
-        return new PageDto(
-            entities.map(entity => this._airportConnectionMapper.toDto(entity)),
-            pageMetaDto
+        return this.getPage(
+            pageOptionsDto,
+            queryBuilder,
+            airportConnectionEntity =>
+                this._airportConnectionMapper.toDto(airportConnectionEntity)
         );
     }
 }

@@ -22,3 +22,13 @@ CREATE TABLE airport_connections
     loading_time   NUMERIC NOT NULL,
     unloading_time NUMERIC NOT NULL
 );
+
+CREATE TABLE travelers
+(
+    id                  UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    departure_airport   varchar(15) REFERENCES airports (ident),
+    destination_airport varchar(15) REFERENCES airports (ident),
+    first_name          varchar(255) NOT NULL,
+    last_name           varchar(255) NOT NULL,
+    created_by          varchar(255) NOT NULL
+);
