@@ -32,3 +32,18 @@ CREATE TABLE travelers
     last_name           varchar(255) NOT NULL,
     created_by          varchar(255) NOT NULL
 );
+
+CREATE TABLE travels
+(
+    id       UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    traveler UUID REFERENCES travelers (id) NOT NULL
+);
+
+CREATE TABLE travel_steps
+(
+    id                 UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    travel_id          UUID REFERENCES travels (id) NOT NULL,
+    step_order         INTEGER,
+    airport_connection UUID REFERENCES airport_connections (id),
+    direction          VARCHAR(31) CHECK (direction IN ('FROM_FIRST_TO_SECOND', 'FROM_SECOND_TO_FIRST'))
+);

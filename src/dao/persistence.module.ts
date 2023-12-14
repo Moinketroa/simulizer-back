@@ -4,11 +4,15 @@ import { AirportEntity } from './airport/entity/airport.entity';
 import * as process from 'process';
 import { AirportConnectionEntity } from './airport-connection/entity/airport-connection.entity';
 import { TravelerEntity } from './traveler/entity/traveler.entity';
+import { TravelEntity } from './travel/entity/travel.entity';
+import { TravelStepEntity } from './travel/entity/travel-step.entity';
 
 const moduleEntities: any[] = [
     AirportEntity,
     AirportConnectionEntity,
     TravelerEntity,
+    TravelEntity,
+    TravelStepEntity,
 ];
 
 @Module({})

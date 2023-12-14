@@ -11,8 +11,7 @@ import { TravelerFactory } from './traveler.factory';
 
 @Injectable()
 export class TravelerService extends PaginatedService implements OnModuleInit {
-
-    private readonly DEFAULT_INITIAL_TRAVELERS: number = 5000;
+    private readonly DEFAULT_INITIAL_TRAVELERS: number = 250;
 
     constructor(
         private readonly _airportRepository: AirportRepository,

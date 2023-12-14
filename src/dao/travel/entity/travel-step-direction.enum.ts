@@ -1,0 +1,4 @@
+export enum TravelStepDirection {
+    FROM_FIRST_TO_SECOND = 'FROM_FIRST_TO_SECOND',
+    FROM_SECOND_TO_FIRST = 'FROM_SECOND_TO_FIRST',
+}
