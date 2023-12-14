@@ -4,6 +4,7 @@ import { AirportModule } from './airport/airport.module';
 import { ConfigModule } from '@nestjs/config';
 import { AirportConnectionModule } from './airport-connection/airport-connection.module';
 import { TravelerModule } from './traveler/traveler.module';
+import { TravelModule } from './travel/travel.module';
 
 @Module({
     imports: [
@@ -16,6 +17,7 @@ import { TravelerModule } from './traveler/traveler.module';
         AirportModule,
         AirportConnectionModule,
         TravelerModule,
+        TravelModule,
     ],
 })
 export class AppModule {}

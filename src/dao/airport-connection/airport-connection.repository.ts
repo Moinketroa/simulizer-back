@@ -16,4 +16,27 @@ export class AirportConnectionRepository extends Repository<AirportConnectionEnt
         const count = await this.count();
         return count === 0;
     }
+
+    async getAirportConnections(
+        airportId: string
+    ): Promise<AirportConnectionEntity[]> {
+        const departureConnectionsQB = this.createQueryBuilder(
+            'airportConnection'
+        )
+            .where('airportConnection.firstAirport.id = :firstAirportId', {
+                firstAirportId: airportId,
+            })
+            .orWhere('airportConnection.secondAirport.id = :secondAirportId', {
+                secondAirportId: airportId,
+            })
+            .leftJoinAndSelect('airportConnection.firstAirport', 'firstAirport')
+            .leftJoinAndSelect(
+                'airportConnection.secondAirport',
+                'secondAirport'
+            );
+
+        const { entities } = await departureConnectionsQB.getRawAndEntities();
+
+        return entities;
+    }
 }
