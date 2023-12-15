@@ -1,9 +1,17 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
+import {
+    Column,
+    Entity,
+    JoinColumn,
+    ManyToOne,
+    OneToOne,
+    PrimaryGeneratedColumn,
+} from 'typeorm';
 import { AirportEntity } from '../../airport/entity/airport.entity';
+import { TravelEntity } from '../../travel/entity/travel.entity';
 
 @Entity('travelers')
 export class TravelerEntity {
-    @PrimaryColumn()
+    @PrimaryGeneratedColumn()
     id: string;
 
     @ManyToOne(() => AirportEntity)
@@ -13,6 +21,9 @@ export class TravelerEntity {
     @ManyToOne(() => AirportEntity)
     @JoinColumn({ name: 'destination_airport' })
     destinationAirport: AirportEntity;
+
+    @OneToOne(() => TravelEntity, travel => travel.traveler)
+    travel: TravelEntity;
 
     @Column({ name: 'first_name' })
     firstName: string;

@@ -5,10 +5,14 @@ import { AirportMapper } from '../../airport/mapper/airport.mapper';
 import { AirportDto } from '../../airport/dto/airport.dto';
 import { TravelerEntity } from '../../dao/traveler/entity/traveler.entity';
 import { AirportEntity } from '../../dao/airport/entity/airport.entity';
+import { TravelEntity } from '../../dao/travel/entity/travel.entity';
+import { TravelDto } from '../../travel/dto/travel.dto';
+import { TravelMapper } from '../../travel/mapper/travel.mapper';
 
 describe('TravelerMapper', () => {
     let travelerMapper: TravelerMapper;
     let airportMapper: DeepMocked<AirportMapper>;
+    let travelMapper: DeepMocked<TravelMapper>;
 
     beforeEach(async () => {
         const app: TestingModule = await Test.createTestingModule({
@@ -19,6 +23,7 @@ describe('TravelerMapper', () => {
 
         travelerMapper = app.get<TravelerMapper>(TravelerMapper);
         airportMapper = app.get(AirportMapper);
+        travelMapper = app.get(TravelMapper);
     });
 
     describe('root', () => {
@@ -34,12 +39,18 @@ describe('TravelerMapper', () => {
                 const destinationAirportEntity = <AirportEntity>{
                     id: 'ID2',
                 };
+                const travelEntity = <TravelEntity>{
+                    id: 'ID_TRAVEL',
+                };
 
                 const departureAirportDto = <AirportDto>{
                     idEnt: 'ID1',
                 };
                 const destinationAirportDto = <AirportDto>{
                     idEnt: 'ID2',
+                };
+                const travelDto = <TravelDto>{
+                    id: 'ID_TRAVEL',
                 };
 
                 const travelerEntity = <TravelerEntity>{
@@ -49,14 +60,22 @@ describe('TravelerMapper', () => {
                     createdBy: 'Computer',
                     departureAirport: departureAirportEntity,
                     destinationAirport: destinationAirportEntity,
+                    travel: travelEntity,
                 };
 
-                //mock airport mapper
+                // mock airport mapper
                 airportMapper.toDto.mockImplementation(airportEntity => {
                     if (airportEntity.id === 'ID1') {
                         return departureAirportDto;
                     } else if (airportEntity.id === 'ID2') {
                         return destinationAirportDto;
+                    }
+                });
+
+                // mock travel mapper
+                travelMapper.toDto.mockImplementation(travelEntity => {
+                    if (travelEntity.id === 'ID_TRAVEL') {
+                        return travelDto;
                     }
                 });
 
@@ -70,6 +89,7 @@ describe('TravelerMapper', () => {
                 expect(travelerResult.createdBy).toEqual('Computer');
                 expect(travelerResult.departureAirport.idEnt).toEqual('ID1');
                 expect(travelerResult.destinationAirport.idEnt).toEqual('ID2');
+                expect(travelerResult.travel.id).toEqual('ID_TRAVEL');
             });
         });
     });

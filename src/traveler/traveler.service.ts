@@ -43,6 +43,7 @@ export class TravelerService extends PaginatedService implements OnModuleInit {
     ): Promise<PageDto<TravelerDto>> {
         const queryBuilder = this._travelerRepository
             .createQueryBuilder('traveler')
+            .leftJoinAndSelect('traveler.travel', 'travel')
             .leftJoinAndSelect('traveler.departureAirport', 'departureAirport')
             .leftJoinAndSelect(
                 'traveler.destinationAirport',
