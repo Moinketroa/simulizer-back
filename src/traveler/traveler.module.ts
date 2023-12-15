@@ -6,6 +6,7 @@ import { AirportModule } from '../airport/airport.module';
 import { TravelerMapper } from './mapper/traveler.mapper';
 import { AirportPersistenceModule } from '../dao/airport/airport-persistence.module';
 import { TravelerFactory } from './traveler.factory';
+import { TravelModule } from '../travel/travel.module';
 
 @Module({
     controllers: [TravelerController],
@@ -14,6 +15,7 @@ import { TravelerFactory } from './traveler.factory';
         TravelerPersistenceModule,
         AirportPersistenceModule,
         AirportModule,
+        TravelModule,
     ],
 })
 export class TravelerModule {}
