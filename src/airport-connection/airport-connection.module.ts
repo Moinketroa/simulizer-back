@@ -19,5 +19,6 @@ import { AirportModule } from '../airport/airport.module';
         AirportConnectionMapper,
     ],
     controllers: [AirportConnectionController],
+    exports: [AirportConnectionMapper],
 })
 export class AirportConnectionModule {}
